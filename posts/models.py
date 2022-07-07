@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.db.models.base import Model
 from django.urls import reverse
@@ -14,7 +15,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     pub_date = models.DateField(null=False)
     content = models.TextField(max_length=5000, help_text='Post body', null=True)
-    images = models.ImageField(upload_to = settings.MEDIA_ROOT, blank=True)
+    images = models.ImageField(upload_to = settings.MEDIA_ROOT.strip(os.sep), blank=True)
 
     def __str__(self):
         return self.title
