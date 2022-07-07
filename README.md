@@ -4,6 +4,9 @@
 ### About
 A barebones forum implemented in Django, which lets users sign up, post a new post and post comments on the existing posts. Admins can open Django admin panel, which is provided built-in by Django for admin functions like deleting or editing posts or comments or removing users from the forum.
 
+### Live Demo
+See the deployed site on heroku here: [BSPForum on Heroku](https://mysterious-thicket-22436.herokuapp.com/)
+
 ### Features
 1. Registration system allows users to register themselves using email id, username, first name, last name and password.
     - Email verification was implemented but commented out (code still present in the source) due to complications in sending emails.
