@@ -1,0 +1,80 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<h1>Home</h1>
+<p>Welcome to BSPForum...</p>
+{% block searchbar %}
+	<h4>Search:</h4>
+	<form class="search_bar" method="GET" action="{% url 'search' %}">
+		<label for="post_query">Post: </label>
+		<input type="search" name="post_query">
+		<label for="author_query">Users: </label>
+		<input type="search" name="author_query">
+		<button type="submit"> Search </button>
+	</form>
+{% endblock %}
+<h2>Forum Stats</h2>
+<p>BSPForum currently has the following stats:</p>
+<ul>
+    <li>Posts: {{num_posts}}</li>
+    <li>Users: {{num_users}}</li>
+</ul>
+
+<br>
+{% if user.is_authenticated %}
+<div>
+	<a href="{% url 'new_post' %}"><button>New Post</button></a>
+</div>
+{% endif %}
+<h2>Latest Posts</h2>
+{% if latest_posts_list %}
+<div>
+	{% for post in latest_posts_list %}
+	<div class="post-container">
+		<a href="{% url 'profile' post.author.username %}" class="username-link">{{ post.author.username }}</a>
+		<a href="{% url 'post' post.pk %}">
+			<div class="post-body">
+				<h4>{{ post.title }}</h4>
+				<span>{{ post.pub_date }}</span>
+				<div></div>
+				{% if post.images %}
+				<img src="{{ post.images.url }}" class="post-image">
+				{% else %}
+				<div class="post-image"></div>
+				{% endif %}
+				<p>{{ post.content|truncatechars:40 }}</p>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+</div>
+{% else %}
+<p>No posts are available.</p>
+{% endif %}
+<style>
+	.post-container {
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		margin: 1rem auto;
+		background-color: #adb0ae;
+		padding: 1rem;
+		border-radius: 1rem;
+	}
+	.post-container a{
+		color: #222222;
+	}
+	.post-body {
+		padding-left: 1rem;
+	}
+	.post-image {
+		width: 50%;
+		margin: auto;
+		display: block;
+		padding: 0.5rem;
+	}
+	a.username-link {
+        color: #2e0aa5;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BSPForum: Forum App Demo</title>
+    <style>
+        .sidebar-nav {
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+        .container-fluid {
+            display: flex;
+            flex-direction: column;
+        }
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        .col-sm-2{
+            flex: 2 1 0;
+            border-right: solid 1px #666666;
+            padding: 1rem;
+        }
+        .col-sm-10{
+            flex: 10 1 0;
+            border-left: solid 1px #666666;
+            padding: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                {% block sidebar %}
+                <ul class="sidebar-nav">
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                </ul>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile' user.username %}">My Profile</a><br>
+                    <a href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'login_url' %}">Login</a><br>
+                    <a href="{% url 'register_url' %}">Register</a>
+                {% endif %}
+                {% endblock %}
+                
+            </div>
+            <div class="col-sm-10 ">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

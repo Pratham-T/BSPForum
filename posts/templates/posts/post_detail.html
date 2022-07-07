@@ -1,0 +1,62 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="post-container">
+	<a href="{% url 'profile' object.author.username %}">{{ object.author.username }}</a>
+	<div class="post-body">
+		<h1>{{ object.title }}</h1>
+		<p>{{ object.pub_date }}</p>
+		{% if object.images %}
+		<img src="{{ object.images.url }}" class="post-image">
+		{% else %}
+		<div class="post-image"></div>
+		{% endif %}
+		<p>{{ object.content }}</p>
+	</div>
+</div>
+<div class="comments-container">
+	<a href="{% url 'new_comment' object.pk %}" class="username-link"><button>Add Comment</button></a>
+	{% if comments %}
+		{% for comment in comments %}
+		<div class="comment">{{ comment.comment }}</div>
+		{% endfor %}
+	{% endif %}
+</div>
+<style>
+	.post-container {
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		margin: auto;
+		background-color: #adb0ae;
+		padding: 1rem;
+		border-radius: 1rem;
+	}
+	.post-container a{
+		color: #222222;
+	}
+	.post-body {
+		padding-left: 1rem;
+	}
+	.post-image {
+		width: 50%;
+		margin: auto;
+		display: block;
+		padding: 0.5rem;
+	}
+	a.username-link {
+        color: #2e0aa5;
+    }
+	.comments-container {
+		margin: 0.25rem;
+	}
+	.comment {
+		/* background-color: #78837a; */
+		border: solid 1px #adb0ae;
+		padding: 0.25rem;
+		margin: 00.25rem;
+		border-radius: 00.25rem;
+	}
+</style>
+
+{% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block title %}
+		<title>BSPForum: Forum App Demo</title>
+		{% endblock %}
+        <style>
+            .sidebar-nav {
+                margin-top: 20px;
+                padding: 0;
+                list-style: none;
+            }
+			.container-fluid {
+				display: flex;
+				flex-direction: column;
+			}
+			.row {
+				display: flex;
+				flex-direction: row;
+			}
+			.col-sm-2{
+				flex: 2 1 0;
+				border-right: solid 1px #666666;
+				padding: 1rem;
+			}
+			.col-sm-10{
+				flex: 10 1 0;
+				border-left: solid 1px #666666;
+				padding: 1rem;
+			}
+
+        </style>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-2">
+					{% block sidebar %}
+					<ul class="sidebar-nav">
+						<li><a href="{% url 'index' %}">Home</a></li>
+					</ul>
+					{% if user.is_authenticated %}
+						<a href="{% url 'profile' user.username %}">My Profile</a><br>
+						<a href="{% url 'logout' %}">Logout</a>
+        			{% else %}
+            			<a href="{% url 'login_url' %}">Login</a>
+            			<a href="{% url 'register_url' %}">Register</a>
+        			{% endif %}
+					{% endblock %}
+					
+				</div>
+                <div class="col-sm-10 ">
+					{% block content %}{% endblock %}
+					{% block pagination %}
+						{% if is_paginated %}
+						<div class="pagination">
+							<span class="page-links">
+								{% if page_obj.has_previous %}
+								<a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+								{% endif %}
+								<span class="page-current">
+									Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+								</span>
+								{% if page_obj.has_next %}
+								<a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+								{% endif %}
+							</span>
+						</div>
+						{% endif %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
