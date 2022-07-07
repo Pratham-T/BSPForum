@@ -28,7 +28,7 @@ class ProfileView(generic.TemplateView):
 
     def profile(request, username):
         all_posts = Post.objects.filter(author = request.user).order_by('pub_date')
-        user_details = User.objects.get(pk=request.user.pk)
+        user_details = User.objects.get(username=username)
         
         context = {
             'all_posts': all_posts,
