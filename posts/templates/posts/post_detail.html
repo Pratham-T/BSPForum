@@ -18,7 +18,10 @@
 	<a href="{% url 'new_comment' object.pk %}" class="username-link"><button>Add Comment</button></a>
 	{% if comments %}
 		{% for comment in comments %}
-		<div class="comment">{{ comment.comment }}</div>
+		<div class="comment-body">
+			<div class="comment-author">{{ comment.author.username }}</div>
+			<div class="comment">{{ comment.comment }}</div>
+		</div>
 		{% endfor %}
 	{% endif %}
 </div>
@@ -48,6 +51,14 @@
         color: #2e0aa5;
     }
 	.comments-container {
+		margin: 0.25rem;
+	}
+	.comment-body {
+		display: flex;
+		flex-direction: row;
+	}
+	.comment-author {
+		padding: 0.25rem;
 		margin: 0.25rem;
 	}
 	.comment {

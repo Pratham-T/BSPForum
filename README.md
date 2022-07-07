@@ -7,6 +7,8 @@ A barebones forum implemented in Django, which lets users sign up, post a new po
 ### Live Demo
 See the deployed site on heroku here: [BSPForum on Heroku](https://mysterious-thicket-22436.herokuapp.com/)
 
+Note: Heroku does not let static images in the free hosting. So posts with images are not available in this demo. If you try to upload image in new post, website will crash.
+
 ### Features
 1. Registration system allows users to register themselves using email id, username, first name, last name and password.
     - Email verification was implemented but commented out (code still present in the source) due to complications in sending emails.
@@ -34,7 +36,21 @@ Requirements:
 
 Steps:
 1. Clone the repo or download the zip and exrtract it to your local machine.
-2. Go to BSPForum directory (which contains the manage.py file ) and run the command from the terminal: `python manage.py runserver`
-    - PS: On certain devices (mostly Windows), you may need to replace `python` with `python3` or `py` in the above command. Run `python --version` or `python3 --version` or `py --version` to check which command is working for you.
+2. Go to BSPForum directory (which contains the manage.py file ) and run the command from the terminal: 
+
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+   
+- In the create superuser step, follow the prompts to create an admin account.  
+- PS: On certain devices (mostly Windows), you may need to replace `python` with `python3` or `py` in the above commands. Run `python --version` or `python3 --version` or `py --version` to check which command is working for you.
 
 If the above command works, the server should be up and running on the default port. Go to the url shown in your terminal window (Generally: `127.0.0.1:8000`)
+
+### Images
+![Home page 1](./ghimg/ss2.jpg)
+![Home page 2](./ghimg/ss3.jpg)
+![Post 1](./ghimg/ss1.jpg)
