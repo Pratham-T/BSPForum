@@ -2,7 +2,6 @@ from django.contrib.auth import forms, get_user_model, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
@@ -10,10 +9,10 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django import forms
 from django.shortcuts import render, redirect
-from django.views import generic, View
+from django.views import generic
 from django.http.response import HttpResponseRedirect, HttpResponse
 
-from .tokens import account_activation_token
+#from .tokens import account_activation_token
 from posts.models import Post, Comment
 
 # Create your views here.
