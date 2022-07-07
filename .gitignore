@@ -1,1 +1,3 @@
+./BSPForum/.env
 *.sqlite3
+*.bak
