@@ -1,1 +1,1 @@
-web: gunicorn booklib.wsgi --log-file -
+web: gunicorn BSPForum.wsgi --log-file -
